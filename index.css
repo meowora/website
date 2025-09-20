@@ -1,0 +1,76 @@
+html {
+    --link-color: #EF5552;
+    --link-hover-color: #F56A67;
+}
+
+html.lightmode {
+    --background-color: #FFFFFF;
+    --text-title-color: #292929;
+    --text-paragraph-color: #424245;
+
+    --theme-name: "Light"
+}
+
+html:not(.lightmode) {
+    --background-color: #131517;
+    --text-title-color: #FAF9F6;
+    --text-paragraph-color: #9f9fa5;
+
+    --theme-name: "Dark"
+}
+
+blockquote {
+    margin-left: 2rem;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    display: flex;
+    justify-content: center;
+
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--background-color);
+    color: var(--text-paragraph-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-title-color);
+}
+
+a, a:visited {
+    color: var(--link-color);
+    text-decoration: unset;
+}
+
+a:hover, a:visited:hover {
+    color: var(--link-hover-color);
+}
+
+html > * {
+    max-width: 600px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+#theme-toggle {
+    cursor: pointer;
+}
+
+#theme-toggle:after {
+    content: var(--theme-name);
+}
