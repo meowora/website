@@ -54,6 +54,8 @@ a:hover, a:visited:hover {
 
 html > * {
     max-width: 600px;
+    padding-left: 3rem;
+    padding-right: 3rem;
 }
 
 body {
