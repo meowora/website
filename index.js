@@ -17,7 +17,7 @@ window.addEventListener("load", () => {
     });
 
     document.getElementById("language-toggle").addEventListener("click", () => {
-        localStorage.setItem("language", localStorage.getItem("language") === "ENGLISH" ? "SPANISH" : "ENGLISH");
+        localStorage.setItem("language", languages[localStorage.getItem("language")]?.next || "ENGLISH");
         switchLanguage(localStorage.getItem("language"));
     });
 })
@@ -33,11 +33,18 @@ document.getElementById("timezone").textContent = utcOffset
 const languages = Object.freeze({
     ENGLISH: {
         key: "en",
-        emoji: "🇬🇧"
+        emoji: "🇬🇧",
+        next: "SPANISH"
     },
     SPANISH: {
         key: "es",
-        emoji: "🇪🇸"
+        emoji: "🇪🇸",
+        next: "CATALAN"
+    },
+    CATALAN: {
+        key: "ca",
+        emoji: "🏴󠁥󠁳󠁣󠁴󠁿",
+        next: "ENGLISH"
     }
 });
 
@@ -50,7 +57,8 @@ const switchLanguage = (language) => {
     if (languages[language] === undefined) return
     const languageElement = languages[language]
 
-    document.getElementById("current-language").innerHTML = toTitleCase(languageElement.key) + " " + languageElement.emoji;
+    document.getElementById("current-language").innerHTML = toTitleCase(languageElement.key)
+    document.getElementById("current-language-emoji").innerHTML = toTitleCase(languageElement.emoji)
 
     let elements = document.getElementsByClassName("lang");
     for (let i = 0; i < elements.length; i++) {
@@ -65,7 +73,7 @@ const switchLanguage = (language) => {
 }
 
 if (window.origin === "https://mona.cat") {
-    switchLanguage("SPANISH")
+    switchLanguage("CATALAN")
 } else {
     switchLanguage("ENGLISH")
 }
