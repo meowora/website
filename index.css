@@ -69,7 +69,7 @@ footer {
     justify-content: space-between;
 }
 
-#theme-toggle {
+#theme-toggle, #language-toggle {
     cursor: pointer;
 }
 

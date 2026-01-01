@@ -15,6 +15,11 @@ window.addEventListener("load", () => {
         localStorage.setItem("colormode", localStorage.getItem("colormode") === "light" ? "dark" : "light");
         switchTheme();
     });
+
+    document.getElementById("language-toggle").addEventListener("click", () => {
+        localStorage.setItem("language", localStorage.getItem("language") === "ENGLISH" ? "SPANISH" : "ENGLISH");
+        switchLanguage(localStorage.getItem("language"));
+    });
 })
 
 const formatter = new Intl.DateTimeFormat("fr-FR", {
@@ -24,3 +29,43 @@ const formatter = new Intl.DateTimeFormat("fr-FR", {
 
 const utcOffset = formatter.formatToParts(new Date()).find(it => it.type === "timeZoneName").value
 document.getElementById("timezone").textContent = utcOffset
+
+const languages = Object.freeze({
+    ENGLISH: {
+        key: "en",
+        emoji: "🇬🇧"
+    },
+    SPANISH: {
+        key: "es",
+        emoji: "🇪🇸"
+    }
+});
+
+function toTitleCase(string) {
+    return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase()
+}
+
+const switchLanguage = (language) => {
+
+    if (languages[language] === undefined) return
+    const languageElement = languages[language]
+
+    document.getElementById("current-language").innerHTML = toTitleCase(languageElement.key) + " " + languageElement.emoji;
+
+    let elements = document.getElementsByClassName("lang");
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i]
+
+        if (element.classList.contains(languageElement.key)) {
+            element.hidden = false;
+        } else {
+            element.hidden = true;
+        }
+    }
+}
+
+if (window.origin === "https://mona.cat") {
+    switchLanguage("SPANISH")
+} else {
+    switchLanguage("ENGLISH")
+}
