@@ -82,3 +82,16 @@ footer {
 #theme-toggle:after {
     content: var(--theme-name);
 }
+
+html:lang("en") [lang]:not(:lang("en")) {
+    visibility: hidden;
+    display: none;
+}
+html:lang("es") [lang]:not(:lang("es")) {
+    visibility: hidden;
+    display: none;
+}
+html:lang("ca") [lang]:not(:lang("ca")) {
+    visibility: hidden;
+    display: none;
+}

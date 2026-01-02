@@ -17,7 +17,6 @@ window.addEventListener("load", () => {
     });
 
     document.getElementById("language-toggle").addEventListener("click", () => {
-        localStorage.setItem("language", languages[localStorage.getItem("language")]?.next || "ENGLISH");
         switchLanguage(localStorage.getItem("language"));
     });
 })
@@ -53,6 +52,7 @@ function toTitleCase(string) {
 }
 
 const switchLanguage = (language) => {
+    localStorage.setItem("language", languages[localStorage.getItem("language")]?.next || "ENGLISH");
 
     if (languages[language] === undefined) return
     const languageElement = languages[language]
@@ -60,16 +60,7 @@ const switchLanguage = (language) => {
     document.getElementById("current-language").innerHTML = toTitleCase(languageElement.key)
     document.getElementById("current-language-emoji").innerHTML = toTitleCase(languageElement.emoji)
 
-    let elements = document.getElementsByClassName("lang");
-    for (let i = 0; i < elements.length; i++) {
-        const element = elements[i]
-
-        if (element.classList.contains(languageElement.key)) {
-            element.hidden = false;
-        } else {
-            element.hidden = true;
-        }
-    }
+    document.getElementsByTagName("html")[0].lang = languageElement.key;
 }
 
 if (window.origin === "https://mona.cat") {
